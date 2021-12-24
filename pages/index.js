@@ -1,4 +1,9 @@
 import Head from "next/head";
+import { Octokit } from "@octokit/core";
+
+const ACCESS_TOKEN = process.env.GITHUB_ACCESS_TOKEN;
+const OWNER = "mkrl";
+const REPO = "misbrands";
 
 export default function Home({ sha, svgPaths }) {
   return (
@@ -40,26 +45,32 @@ export default function Home({ sha, svgPaths }) {
 }
 
 export async function getStaticProps() {
-  const commitsResp = await fetch(
-    "https://api.github.com/repos/mkrl/misbrands/commits/master",
+  const octokit = new Octokit({ auth: ACCESS_TOKEN });
+
+  const commitsResp = await octokit.request(
+    "GET /repos/{owner}/{repo}/commits/{ref}",
     {
-      headers: {
-        Accept: "application/vnd.github.v3+json",
-      },
+      owner: OWNER,
+      repo: REPO,
+      ref: "master",
     }
   );
-  const commitsJSON = await commitsResp.json();
+  const commitsJSON = commitsResp.data;
   const sha = commitsJSON["sha"];
-  const treeURL = commitsJSON["commit"]["tree"]["url"];
-  const treeResp = await fetch(treeURL, {
-    headers: {
-      Accept: "application/vnd.github.v3+json",
-    },
-  });
-  const treeJSON = await treeResp.json();
+
+  const treeResp = await octokit.request(
+    "GET /repos/{owner}/{repo}/git/trees/{tree_sha}",
+    {
+      owner: OWNER,
+      repo: REPO,
+      tree_sha: sha,
+    }
+  );
+  const treeJSON = treeResp.data;
   const svgPaths = treeJSON["tree"]
     .map((e) => e.path)
     .filter((path) => path.endsWith(".svg"));
+
   return {
     props: {
       sha,
