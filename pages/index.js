@@ -1,18 +1,6 @@
 import Head from "next/head";
 
-const names = [
-  "ferris",
-  "github",
-  "javascript",
-  "pip",
-  "rails",
-  "react",
-  "rust",
-  "ubuntu",
-  "vscode",
-];
-
-export default function Home() {
+export default function Home({ sha, svgPaths }) {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <Head>
@@ -38,11 +26,11 @@ export default function Home() {
             Star
           </a>
         </h1>
-        {names.map((name) => (
+        {svgPaths.map((path) => (
           <img
-            key={name}
+            key={path}
             width="500"
-            src={`https://raw.githubusercontent.com/mkrl/misbrands/456ea8aa2c7873123dce3d746528bb9a3b6dd139/${name}.svg`}
+            src={`https://raw.githubusercontent.com/mkrl/misbrands/${sha}/${path}`}
             alt="a"
           />
         ))}
@@ -51,16 +39,31 @@ export default function Home() {
   );
 }
 
-// export async function getStaticProps() {
-//   const res = await fetch('https://api.github.com/repos/mkrl/misbrands/commits/master', {
-//     headers: {
-//       'Accept': 'application/vnd.github.v3+json'
-//     }
-//   })
-//   const json = await res.json()
-//   return {
-//     props: {
-//       json
-//     }
-//   }
-// }
+export async function getStaticProps() {
+  const commitsResp = await fetch(
+    "https://api.github.com/repos/mkrl/misbrands/commits/master",
+    {
+      headers: {
+        Accept: "application/vnd.github.v3+json",
+      },
+    }
+  );
+  const commitsJSON = await commitsResp.json();
+  const sha = commitsJSON["sha"];
+  const treeURL = commitsJSON["commit"]["tree"]["url"];
+  const treeResp = await fetch(treeURL, {
+    headers: {
+      Accept: "application/vnd.github.v3+json",
+    },
+  });
+  const treeJSON = await treeResp.json();
+  const svgPaths = treeJSON["tree"]
+    .map((e) => e.path)
+    .filter((path) => path.endsWith(".svg"));
+  return {
+    props: {
+      sha,
+      svgPaths,
+    },
+  };
+}
