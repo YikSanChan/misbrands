@@ -30,7 +30,7 @@ export default function Home() {
           </a>{" "}
           Showcase{" "}
           <a
-            class="github-button"
+            className="github-button"
             href="https://github.com/yiksanchan/misbrands"
             data-show-count="true"
             aria-label="Star yiksanchan/misbrands on GitHub"
