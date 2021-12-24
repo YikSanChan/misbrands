@@ -19,6 +19,7 @@ export default function Home() {
         <title>Misbrands</title>
         <link rel="icon" href="/favicon.ico" />
         <script async defer src="https://buttons.github.io/buttons.js"></script>
+        <script async src="https://cdn.splitbee.io/sb.js"></script>
       </Head>
 
       <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
