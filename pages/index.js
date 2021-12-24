@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import Head from "next/head";
 
 const names = [
   "ferris",
@@ -9,8 +9,8 @@ const names = [
   "react",
   "rust",
   "ubuntu",
-  "vscode"
-]
+  "vscode",
+];
 
 export default function Home() {
   return (
@@ -24,14 +24,32 @@ export default function Home() {
 
       <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
         <h1 className="text-3xl font-bold">
-        Unofficial <a className="text-blue-600" href="https://github.com/mkrl/misbrands">Misbrands</a> Showcase <a class="github-button" href="https://github.com/yiksanchan/misbrands" data-show-count="true" aria-label="Star yiksanchan/misbrands on GitHub">Star</a>
+          Unofficial{" "}
+          <a className="text-blue-600" href="https://github.com/mkrl/misbrands">
+            Misbrands
+          </a>{" "}
+          Showcase{" "}
+          <a
+            class="github-button"
+            href="https://github.com/yiksanchan/misbrands"
+            data-show-count="true"
+            aria-label="Star yiksanchan/misbrands on GitHub"
+          >
+            Star
+          </a>
         </h1>
-        {names.map(name => (
-          <img key={name} width="500" height="500" src={`https://raw.githubusercontent.com/mkrl/misbrands/456ea8aa2c7873123dce3d746528bb9a3b6dd139/${name}.svg`} alt="a" />
+        {names.map((name) => (
+          <img
+            key={name}
+            width="500"
+            height="500"
+            src={`https://raw.githubusercontent.com/mkrl/misbrands/456ea8aa2c7873123dce3d746528bb9a3b6dd139/${name}.svg`}
+            alt="a"
+          />
         ))}
       </main>
     </div>
-  )
+  );
 }
 
 // export async function getStaticProps() {
