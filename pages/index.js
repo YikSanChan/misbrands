@@ -33,6 +33,7 @@ export default function Home({ sha, svgPaths }) {
         </h1>
         {svgPaths.map((path) => (
           <img
+            className="mt-20"
             key={path}
             width="500"
             src={`https://raw.githubusercontent.com/mkrl/misbrands/${sha}/${path}`}
