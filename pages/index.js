@@ -37,7 +37,7 @@ export default function Home({ sha, svgPaths }) {
             key={path}
             width="500"
             src={`https://raw.githubusercontent.com/mkrl/misbrands/${sha}/${path}`}
-            alt="a"
+            alt={path}
           />
         ))}
       </main>
