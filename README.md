@@ -1,3 +1,3 @@
-# Unofficial Misbrands UI
+# Unofficial Misbrands Showcase
 
-[Misbrands](https://github.com/mkrl/misbrands) is hilarious. I make it more accessible.
+[Misbrands](https://github.com/mkrl/misbrands) is hilarious. I make it accessible.
