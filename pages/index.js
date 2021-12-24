@@ -42,7 +42,6 @@ export default function Home() {
           <img
             key={name}
             width="500"
-            height="500"
             src={`https://raw.githubusercontent.com/mkrl/misbrands/456ea8aa2c7873123dce3d746528bb9a3b6dd139/${name}.svg`}
             alt="a"
           />
