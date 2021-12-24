@@ -40,6 +40,15 @@ export default function Home({ sha, svgPaths }) {
           />
         ))}
       </main>
+      <footer className="flex items-center justify-center w-full h-24 border-t">
+        <p>By&nbsp;</p>
+        <a
+          className="text-white bg-black"
+          href="https://twitter.com/yiksanchan"
+        >
+          @yiksanchan
+        </a>
+      </footer>
     </div>
   );
 }
